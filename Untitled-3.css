@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,8 @@
       --card-bg: rgba(255, 255, 255, 0.95);
       --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
       --shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      --success-color: #10B981;
+      --warning-color: #F59E0B;
     }
 
     body {
@@ -35,6 +37,19 @@
       background: var(--gradient-bg);
       color: var(--text-dark);
       overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+
+    /* Language transition effects */
+    .lang-transition {
+      opacity: 0.7;
+      transform: translateX(10px);
+      transition: all 0.3s ease;
+    }
+
+    .lang-transition.active {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     /* Animated background */
@@ -58,6 +73,50 @@
       100% { transform: scale(1.1) rotate(1deg); }
     }
 
+    /* Language switcher */
+    .language-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+      padding: 0.25rem;
+      transition: all 0.3s ease;
+    }
+
+    .language-switcher:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .lang-btn {
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .lang-btn.active {
+      background: var(--accent-color);
+      color: white;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .lang-btn:hover:not(.active) {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
     /* Header */
     header {
       background: rgba(15, 23, 42, 0.95);
@@ -77,6 +136,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 2rem;
+      gap: 1rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
     }
 
     .logo {
@@ -295,6 +361,30 @@
       margin-bottom: 0.5rem;
     }
 
+    /* Status badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: auto;
+    }
+
+    .status-available {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success-color);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .status-coming-soon {
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--warning-color);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
     /* Buttons */
     .btn {
       display: inline-flex;
@@ -329,6 +419,14 @@
       color: white;
     }
 
+    .btn-success {
+      background: var(--success-color);
+    }
+
+    .btn-success:hover {
+      background: #059669;
+    }
+
     /* About section special styling */
     .about-content {
       background: var(--card-bg);
@@ -357,6 +455,76 @@
       color: #64748B;
       margin-bottom: 2rem;
       line-height: 1.7;
+    }
+
+    /* Class Notes Section */
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .note-item {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .note-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-color), #8B5CF6);
+    }
+
+    .note-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .note-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .note-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    .note-semester {
+      font-size: 0.875rem;
+      color: var(--accent-color);
+      font-weight: 500;
+    }
+
+    .note-description {
+      color: #64748B;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .note-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
     /* Contact section */
@@ -410,10 +578,48 @@
       margin-top: 4rem;
     }
 
+    /* Language content visibility */
+    .lang-content {
+      display: none;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.3s ease;
+    }
+
+    .lang-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .lang-content.show {
+      animation: slideInFromRight 0.5s ease-out forwards;
+    }
+    
+    .nav-lang-wrapper.active {
+      display: contents; /* Allows nav items to flow correctly */
+    }
+
+
+    @keyframes slideInFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .header-content {
         padding: 0 1rem;
+      }
+
+      .header-left {
+        gap: 1rem;
       }
 
       nav {
@@ -428,6 +634,13 @@
         flex-direction: column;
         padding: 1rem;
         gap: 0.5rem;
+      }
+      
+      nav .lang-content.active {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
       }
 
       nav.active {
@@ -455,8 +668,20 @@
         grid-template-columns: 1fr;
       }
 
+      .notes-grid {
+        grid-template-columns: 1fr;
+      }
+
       .about-content {
         padding: 2rem;
+      }
+
+      .note-actions {
+        justify-content: center;
+      }
+
+      .language-switcher {
+        order: -1;
       }
     }
 
@@ -476,192 +701,777 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Download indicator */
+    .download-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #64748B;
+      margin-top: 0.5rem;
+    }
+
+    /* Flag icons */
+    .flag-icon {
+      width: 16px;
+      height: 12px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .flag-en{
+  width: 16px;
+  height: 8px; /* Height is 8px to maintain the 2:1 ratio */
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden; /* Hides parts of the background outside the radius */
+  background:
+    /* Red Cross */
+    linear-gradient(180deg, transparent 3.2px, #c8102e 3.2px, #c8102e 4.8px, transparent 4.8px),
+    linear-gradient(90deg, transparent 7.2px, #c8102e 7.2px, #c8102e 8.8px, transparent 8.8px),
+    /* White Cross */
+    linear-gradient(180deg, transparent 2.7px, #FFF 2.7px, #FFF 5.3px, transparent 5.3px),
+    linear-gradient(90deg, transparent 6.7px, #FFF 6.7px, #FFF 9.3px, transparent 9.3px),
+    /* Saltires (Diagonal crosses) */
+    linear-gradient(26.565deg, transparent 6.6px, #c8102e 6.6px, #c8102e 7.1px, transparent 7.1px) 0 0 / 8px 100% no-repeat,
+    linear-gradient(-26.565deg, transparent 7.1px, #c8102e 7.1px, #c8102e 7.7px, transparent 7.7px) 8px 0 / 8px 100% no-repeat,
+    linear-gradient(26.565deg, transparent 7.1px, #c8102e 7.1px, #c8102e 7.7px, transparent 7.7px) 8px 4px / 8px 100% no-repeat,
+    linear-gradient(-26.565deg, transparent 6.6px, #c8102e 6.6px, #c8102e 7.1px, transparent 7.1px) 0 4px / 8px 100% no-repeat,
+    linear-gradient(26.565deg, transparent 6.3px, #FFF 6.3px, #FFF 7.9px, transparent 7.9px),
+    linear-gradient(-26.565deg, transparent 6.3px, #FFF 6.3px, #FFF 7.9px, transparent 7.9px),
+    /* Blue background */
+    #012169;
+}
+
+/* The main flag container */
+.flag-tr{
+  width: 20px;
+  height: 12px;
+  border-radius: 2px; /* You can add this if you like */
+  position: relative;
+  overflow: hidden;
+  background-color: #E30A17; /* Red background */
+}
+
+/* Creates the white circle for the crescent */
+.flag-tr::before {
+  content: '';
+  position: absolute;
+  top: 3px;    /* Vertically centered */
+  left: 4px;   /* Positioned from left */
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+/* Creates the red "cutout" for the crescent and the star */
+.flag-tr::after {
+  /* The 'content' is the star character */
+  content: '★';
+  position: absolute;
+  top: 3px;
+  left: 9px;
+  font-size: 5px;
+  line-height: 1;
+  color: white;
+
+  /* This box-shadow creates a red circle on top of the white one,
+     forming the crescent shape. */
+  box-shadow: -1.5px 0 0 1px #E30A17;
+  border-radius: 50%;
+}
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="header-content">
-      <a href="#" class="logo">Dr. Selim Ünal</a>
+      <div class="header-left">
+        <a href="#" class="logo">Dr. Selim Ünal</a>
+        <div class="language-switcher">
+          <button class="lang-btn active" onclick="switchLanguage('en')" data-lang="en">
+            <span class="flag-icon flag-en"></span>
+            EN
+          </button>
+          <button class="lang-btn" onclick="switchLanguage('tr')" data-lang="tr">
+            <span class="flag-icon flag-tr"></span>
+            TR
+          </button>
+        </div>
+      </div>
       <nav id="nav">
-        <a href="#about">About</a>
-        <a href="#research">Research</a>
-        <a href="#publications">Publications</a>
-        <a href="#teaching">Teaching</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <div class="lang-content" id="nav-en">
+          <a href="#about">About</a>
+          <a href="#research">Research</a>
+          <a href="#publications">Publications</a>
+          <a href="#teaching">Teaching</a>
+          <a href="#class-notes">Class Notes</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="lang-content" id="nav-tr">
+          <a href="#about">Hakkında</a>
+          <a href="#research">Araştırma</a>
+          <a href="#publications">Yayınlar</a>
+          <a href="#teaching">Öğretim</a>
+          <a href="#class-notes">Ders Notları</a>
+          <a href="#projects">Projeler</a>
+          <a href="#contact">İletişim</a>
+        </div>
       </nav>
       <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
   <section class="hero">
-    <h1 class="hero-title">Dr. Selim Ünal</h1>
-    <p class="hero-subtitle">Machine Learning, Nanotechnology and Data Science Expert</p>
-    <a href="#contact" class="hero-cta">
-      <span>Get in Touch</span>
-      <span>→</span>
-    </a>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <h2 class="section-title">About</h2>
-    <div class="about-content fade-in">
-      <p>I am a faculty member at Kastamonu University. My research focuses on machine learning, deep learning, nanotechnology and data science. I explore applications of artificial intelligence technologies in materials science and optoelectronics, contributing to the development of next-generation technologies.</p>
-      <a class="btn" href="CV.pdf" target="_blank">
-        <span>📄</span>
-        Download CV
+    <div class="lang-content" id="hero-en">
+      <h1 class="hero-title">Dr. Selim Ünal</h1>
+      <p class="hero-subtitle">Machine Learning, Nanotechnology and Data Science</p>
+      <a href="#contact" class="hero-cta">
+        <span>Get in Touch</span>
+        <span>→</span>
+      </a>
+    </div>
+    <div class="lang-content" id="hero-tr">
+      <h1 class="hero-title">Dr. Selim Ünal</h1>
+      <p class="hero-subtitle">Makine Öğrenmesi, Nanoteknoloji ve Veri Bilimi</p>
+      <a href="#contact" class="hero-cta">
+        <span>İletişime Geç</span>
+        <span>→</span>
       </a>
     </div>
   </section>
 
-  <!-- ARAŞTIRMALAR -->
+  <section id="about">
+    <div class="lang-content" id="about-en">
+      <h2 class="section-title">About</h2>
+      <div class="about-content fade-in">
+        <p>I am a faculty member at Kastamonu University specializing in machine learning, deep learning, nanotechnology and data science. My research explores applications of artificial intelligence technologies in materials science and optoelectronics, contributing to the development of next-generation technologies and innovative solutions.</p>
+      </div>
+    </div>
+    <div class="lang-content" id="about-tr">
+      <h2 class="section-title">Hakkında</h2>
+      <div class="about-content fade-in">
+        <p>Kastamonu Üniversitesi'nde makine öğrenmesi, derin öğrenme, nanoteknoloji ve veri bilimi alanlarında uzmanlaşmış bir öğretim üyesiyim. Araştırmalarım, yapay zeka teknolojilerinin malzeme bilimi ve optoelektronik alanlarındaki uygulamalarını keşfederek, yeni nesil teknolojilerin geliştirilmesine ve yenilikçi çözümlere katkıda bulunmaktadır.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="research">
-    <h2 class="section-title">Araştırmalar</h2>
-    <div class="cards-grid">
-      <div class="card fade-in">
-        <h3>
-          <div class="card-icon">📈</div>
-          Zaman Serisi Analizi
-        </h3>
-        <p>Yapay zeka temelli tahmin modelleri geliştirerek karmaşık zaman serisi verilerinin analizini yapıyorum. LSTM, ARIMA ve hibrit modeller kullanarak gelecek değerleri tahmin etme konusunda uzmanlaşmış durumdayım.</p>
+    <div class="lang-content" id="research-en">
+      <h2 class="section-title">Research Areas</h2>
+      <div class="cards-grid">
+        <div class="card fade-in">
+          <h3>
+            <div class="card-icon">📈</div>
+            Time Series Analysis
+          </h3>
+          <p>Developing AI-based prediction models for complex time series data analysis. I specialize in forecasting future values using LSTM, ARIMA, and hybrid models with advanced machine learning techniques.</p>
+        </div>
+        <div class="card fade-in">
+          <h3>
+            <div class="card-icon">⚛️</div>
+            Nanomaterials
+          </h3>
+          <p>Utilizing artificial intelligence algorithms to predict and optimize nanomaterial properties. I apply machine learning techniques for predicting material characteristics and performance optimization.</p>
+        </div>
+        <div class="card fade-in">
+          <h3>
+            <div class="card-icon">💡</div>
+            Optoelectronics
+          </h3>
+          <p>Conducting research on photodetectors and polymer-based devices. I develop innovative approaches to enhance the performance of optoelectronic devices using cutting-edge technologies.</p>
+        </div>
       </div>
-      <div class="card fade-in">
-        <h3>
-          <div class="card-icon">⚛️</div>
-          Nanomalzemeler
-        </h3>
-        <p>Yapay zeka algoritmaları kullanarak nanomalzemelerin özelliklerini tahmin etme ve optimizasyon çalışmaları yürütüyorum. Malzeme özelliklerini önceden belirleme konusunda makine öğrenimi tekniklerini kullanıyorum.</p>
-      </div>
-      <div class="card fade-in">
-        <h3>
-          <div class="card-icon">💡</div>
-          Optoelektronik
-        </h3>
-        <p>Fotodetektörler ve polimer tabanlı cihazlar üzerinde çalışmalar yapıyorum. Optoelektronik cihazların performansını artırmak için yenilikçi yaklaşımlar geliştiriyorum.</p>
+    </div>
+    <div class="lang-content" id="research-tr">
+      <h2 class="section-title">Araştırma Alanları</h2>
+      <div class="cards-grid">
+        <div class="card fade-in">
+          <h3>
+            <div class="card-icon">📈</div>
+            Zaman Serisi Analizi
+          </h3>
+          <p>Karmaşık zaman serisi verilerinin analizi için yapay zeka tabanlı tahmin modelleri geliştiriyorum. LSTM, ARIMA ve hibrit modeller kullanarak gelişmiş makine öğrenmesi teknikleriyle gelecek değerlerini tahmin etme konusunda uzmanlaşıyorum.</p>
+        </div>
+        <div class="card fade-in">
+          <h3>
+            <div class="card-icon">⚛️</div>
+            Nanomateryaller
+          </h3>
+          <p>Nanomateryal özelliklerini tahmin etmek ve optimize etmek için yapay zeka algoritmalarını kullanıyorum. Malzeme karakteristiklerini tahmin etmek ve performans optimizasyonu için makine öğrenmesi tekniklerini uyguluyorum.</p>
+        </div>
+        <div class="card fade-in">
+          <h3>
+            <div class="card-icon">💡</div>
+            Optoelektronik
+          </h3>
+          <p>Fotodedektörler ve polimer tabanlı cihazlar üzerinde araştırma yapıyorum. En son teknolojileri kullanarak optoelektronik cihazların performansını artırmak için yenilikçi yaklaşımlar geliştiriyorum.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- YAYINLAR -->
   <section id="publications">
-    <h2 class="section-title">Yayınlar</h2>
-    <div class="card fade-in">
-      <h3>
-        <div class="card-icon">🎓</div>
-        Akademik Yayınlar
-      </h3>
-      <p>Makine öğrenimi, nanoteknoloji ve veri bilimi alanlarında yayımlanmış makalelerim ve araştırmalarım hakkında detaylı bilgi için Google Scholar profilimi ziyaret edebilirsiniz.</p>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-        <a href="https://scholar.google.com" target="_blank" class="btn">
-          <span>🔗</span>
-          Google Scholar
-        </a>
-        <a href="#" class="btn btn-secondary">
-          <span>📄</span>
-          Yayın Listesi
-        </a>
-      </div>
-    </div>
-  </section>
+        <div class="lang-content" id="publications-en">
+            <h2 class="section-title">Publications</h2>
+            <div class="card fade-in">
+                <h3>
+                    <div class="card-icon">🎓</div>
+                    Academic Publications
+                </h3>
+                <p>For detailed information about my published papers and research in machine learning, nanotechnology, and data science, please visit my academic profiles. My work contributes to advancing the understanding of AI applications in materials science.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://scholar.google.com" target="_blank" class="btn">
+                        <span>🔗</span>
+                        Google Scholar
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <span>📄</span>
+                        Publication List
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="lang-content" id="publications-tr">
+            <h2 class="section-title">Yayınlar</h2>
+            <div class="card fade-in">
+                <h3>
+                    <div class="card-icon">🎓</div>
+                    Akademik Yayınlar
+                </h3>
+                <p>Makine öğrenmesi, nanoteknoloji ve veri bilimi alanlarındaki yayınlanmış makalelerim ve araştırmalarım hakkında detaylı bilgi için akademik profillerimi ziyaret edebilirsiniz. Çalışmalarım, yapay zekanın malzeme bilimindeki uygulamalarının anlaşılmasına katkıda bulunmaktadır.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://scholar.google.com" target="_blank" class="btn">
+                        <span>🔗</span>
+                        Google Scholar
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <span>📄</span>
+                        Yayın Listesi
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- DERSLER -->
   <section id="teaching">
-    <h2 class="section-title">Dersler</h2>
-    <div class="cards-grid">
-      <div class="card fade-in">
-        <h3>
-          <div class="card-icon">🤖</div>
-          Makine Öğrenimi
-        </h3>
-        <p>Temel makine öğrenimi algoritmalarından derin öğrenme tekniklerine kadar geniş bir yelpazede eğitim veriyorum. Teorik bilgiyi pratik uygulamalarla destekliyorum.</p>
-        <a class="btn" href="dersnotlari.pdf" target="_blank">
-          <span>📚</span>
-          Ders Notları İndir
-        </a>
-      </div>
-      <div class="card fade-in">
-        <h3>
-          <div class="card-icon">📊</div>
-          Veri Bilimi
-        </h3>
-        <p>Veri analizi, istatistiksel modelleme ve büyük veri işleme teknikleri konularında kapsamlı eğitimler düzenliyorum.</p>
-        <a class="btn btn-secondary" href="#contact">
-          <span>💬</span>
-          Bilgi Al
-        </a>
-      </div>
-    </div>
-  </section>
+        <div class="lang-content" id="teaching-en">
+            <h2 class="section-title">Teaching</h2>
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <h3>
+                        <div class="card-icon">🤖</div>
+                        Machine Learning
+                    </h3>
+                    <p>Teaching comprehensive courses from fundamental machine learning algorithms to advanced deep learning techniques. I combine theoretical knowledge with practical applications and hands-on projects.</p>
+                    <a class="btn" href="#class-notes">
+                        <span>📚</span>
+                        View Class Notes
+                    </a>
+                </div>
+                <div class="card fade-in">
+                    <h3>
+                        <div class="card-icon">📊</div>
+                        Data Science
+                    </h3>
+                    <p>Providing comprehensive training in data analysis, statistical modeling, and big data processing techniques. Courses include practical experience with real-world datasets and industry tools.</p>
+                    <a class="btn btn-secondary" href="#contact">
+                        <span>💬</span>
+                        Get Information
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="lang-content" id="teaching-tr">
+            <h2 class="section-title">Öğretim</h2>
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <h3>
+                        <div class="card-icon">🤖</div>
+                        Makine Öğrenmesi
+                    </h3>
+                    <p>Temel makine öğrenmesi algoritmalarından ileri derin öğrenme tekniklerine kadar kapsamlı dersler veriyorum. Teorik bilgiyi pratik uygulamalar ve uygulamalı projelerle birleştiriyorum.</p>
+                    <a class="btn" href="#class-notes">
+                        <span>📚</span>
+                        Ders Notlarını Görüntüle
+                    </a>
+                </div>
+                <div class="card fade-in">
+                    <h3>
+                        <div class="card-icon">📊</div>
+                        Veri Bilimi
+                    </h3>
+                    <p>Veri analizi, istatistiksel modelleme ve büyük veri işleme teknikleri konularında kapsamlı eğitimler veriyorum. Dersler, gerçek dünya veri setleri ve endüstri araçlarıyla pratik deneyim içerir.</p>
+                    <a class="btn btn-secondary" href="#contact">
+                        <span>💬</span>
+                        Bilgi Al
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- PROJELER -->
+  <section id="class-notes">
+        <div class="lang-content" id="class-notes-en">
+            <h2 class="section-title">Class Notes for Students</h2>
+            <div class="notes-grid">
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Introduction to Machine Learning</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Available
+                  </div>
+                </div>
+                <div class="note-semester">Fall 2024</div>
+                <p class="note-description">Comprehensive introduction to ML fundamentals including supervised learning, unsupervised learning, and basic neural networks. Includes Python code examples and practical exercises.</p>
+                <div class="note-actions">
+                  <a href="ml-intro-notes.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    Download PDF
+                  </a>
+                  <a href="ml-intro-slides.pdf" class="btn btn-secondary" target="_blank">
+                    <span>🖼️</span>
+                    Slides
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>📊</span>
+                  <span>156 pages • Last updated: Dec 2024</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Deep Learning Fundamentals</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Available
+                  </div>
+                </div>
+                <div class="note-semester">Spring 2024</div>
+                <p class="note-description">Advanced topics in deep learning including CNNs, RNNs, and Transformers. Contains practical implementations using TensorFlow and PyTorch with real-world applications.</p>
+                <div class="note-actions">
+                  <a href="deep-learning-notes.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    Download PDF
+                  </a>
+                  <a href="dl-code-examples.zip" class="btn btn-secondary" target="_blank">
+                    <span>💾</span>
+                    Code Examples
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>🧠</span>
+                  <span>203 pages • Includes Python notebooks</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Time Series Analysis with AI</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Available
+                  </div>
+                </div>
+                <div class="note-semester">Fall 2024</div>
+                <p class="note-description">Specialized course on time series forecasting using LSTM, ARIMA, and hybrid models. Includes financial data analysis and predictive modeling case studies.</p>
+                <div class="note-actions">
+                  <a href="time-series-notes.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    Download PDF
+                  </a>
+                  <a href="ts-datasets.zip" class="btn btn-secondary" target="_blank">
+                    <span>📈</span>
+                    Datasets
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>⏱️</span>
+                  <span>128 pages • Includes R and Python code</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Data Science Methods</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Available
+                  </div>
+                </div>
+                <div class="note-semester">Spring 2024</div>
+                <p class="note-description">Complete guide to data science methodologies including data preprocessing, visualization, statistical analysis, and model evaluation techniques.</p>
+                <div class="note-actions">
+                  <a href="data-science-notes.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    Download PDF
+                  </a>
+                  <a href="ds-exercises.pdf" class="btn btn-secondary" target="_blank">
+                    <span>✏️</span>
+                    Exercises
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>📊</span>
+                  <span>189 pages • Updated Dec 2024</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">AI in Materials Science</h3>
+                  <div class="status-badge status-coming-soon">
+                    <span>●</span>
+                    Coming Soon
+                  </div>
+                </div>
+                <div class="note-semester">Spring 2025</div>
+                <p class="note-description">Advanced topics on applying artificial intelligence and machine learning techniques to materials science research, including nanomaterial property prediction.</p>
+                <div class="note-actions">
+                  <a href="#contact" class="btn btn-secondary">
+                    <span>📧</span>
+                    Get Notified
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>🔬</span>
+                  <span>Expected: February 2025</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Research Methodology</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Available
+                  </div>
+                </div>
+                <div class="note-semester">All Semesters</div>
+                <p class="note-description">Essential guide for graduate students on research methodology, academic writing, literature review techniques, and scientific presentation skills.</p>
+                <div class="note-actions">
+                  <a href="research-methodology.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    Download PDF
+                  </a>
+                  <a href="writing-guide.pdf" class="btn btn-secondary" target="_blank">
+                    <span>✍️</span>
+                    Writing Guide
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>🎓</span>
+                  <span>95 pages • Essential for graduate students</span>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="lang-content" id="class-notes-tr">
+            <h2 class="section-title">Öğrenciler İçin Ders Notları</h2>
+            <div class="notes-grid">
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Makine Öğrenmesine Giriş</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Mevcut
+                  </div>
+                </div>
+                <div class="note-semester">Güz 2024</div>
+                <p class="note-description">Denetimli öğrenme, denetimsiz öğrenme ve temel sinir ağları dahil olmak üzere makine öğrenmesi temellerine kapsamlı bir giriş. Python kod örnekleri ve pratik alıştırmalar içerir.</p>
+                <div class="note-actions">
+                  <a href="ml-intro-notes.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    PDF İndir
+                  </a>
+                  <a href="ml-intro-slides.pdf" class="btn btn-secondary" target="_blank">
+                    <span>🖼️</span>
+                    Slaytlar
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>📊</span>
+                  <span>156 sayfa • Son güncelleme: Ara 2024</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Derin Öğrenme Temelleri</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Mevcut
+                  </div>
+                </div>
+                <div class="note-semester">Bahar 2024</div>
+                <p class="note-description">CNN'ler, RNN'ler ve Transformer'lar dahil olmak üzere derin öğrenmedeki ileri konular. TensorFlow ve PyTorch kullanılarak gerçek dünya uygulamalarıyla pratik uygulamalar içerir.</p>
+                <div class="note-actions">
+                  <a href="deep-learning-notes.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    PDF İndir
+                  </a>
+                  <a href="dl-code-examples.zip" class="btn btn-secondary" target="_blank">
+                    <span>💾</span>
+                    Kod Örnekleri
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>🧠</span>
+                  <span>203 sayfa • Python not defterleri içerir</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Yapay Zeka ile Zaman Serisi Analizi</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Mevcut
+                  </div>
+                </div>
+                <div class="note-semester">Güz 2024</div>
+                <p class="note-description">LSTM, ARIMA ve hibrit modelleri kullanarak zaman serisi tahmini üzerine özel bir ders. Finansal veri analizi ve tahmini modelleme vaka çalışmaları içerir.</p>
+                <div class="note-actions">
+                  <a href="time-series-notes.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    PDF İndir
+                  </a>
+                  <a href="ts-datasets.zip" class="btn btn-secondary" target="_blank">
+                    <span>📈</span>
+                    Veri Setleri
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>⏱️</span>
+                  <span>128 sayfa • R ve Python kodu içerir</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Veri Bilimi Yöntemleri</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Mevcut
+                  </div>
+                </div>
+                <div class="note-semester">Bahar 2024</div>
+                <p class="note-description">Veri ön işleme, görselleştirme, istatistiksel analiz ve model değerlendirme teknikleri dahil olmak üzere veri bilimi metodolojilerine tam bir kılavuz.</p>
+                <div class="note-actions">
+                  <a href="data-science-notes.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    PDF İndir
+                  </a>
+                  <a href="ds-exercises.pdf" class="btn btn-secondary" target="_blank">
+                    <span>✏️</span>
+                    Alıştırmalar
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>📊</span>
+                  <span>189 sayfa • Güncelleme Ara 2024</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Malzeme Biliminde Yapay Zeka</h3>
+                  <div class="status-badge status-coming-soon">
+                    <span>●</span>
+                    Yakında
+                  </div>
+                </div>
+                <div class="note-semester">Bahar 2025</div>
+                <p class="note-description">Nanomalzeme özellik tahmini de dahil olmak üzere malzeme bilimi araştırmalarına yapay zeka ve makine öğrenmesi tekniklerinin uygulanması üzerine ileri konular.</p>
+                <div class="note-actions">
+                  <a href="#contact" class="btn btn-secondary">
+                    <span>📧</span>
+                    Bildirim Al
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>🔬</span>
+                  <span>Beklenen: Şubat 2025</span>
+                </div>
+              </div>
+
+              <div class="note-item fade-in">
+                <div class="note-header">
+                  <h3 class="note-title">Araştırma Metodolojisi</h3>
+                  <div class="status-badge status-available">
+                    <span>●</span>
+                    Mevcut
+                  </div>
+                </div>
+                <div class="note-semester">Tüm Dönemler</div>
+                <p class="note-description">Lisansüstü öğrenciler için araştırma metodolojisi, akademik yazım, literatür tarama teknikleri ve bilimsel sunum becerileri üzerine temel bir kılavuz.</p>
+                <div class="note-actions">
+                  <a href="research-methodology.pdf" class="btn btn-success" target="_blank">
+                    <span>📥</span>
+                    PDF İndir
+                  </a>
+                  <a href="writing-guide.pdf" class="btn btn-secondary" target="_blank">
+                    <span>✍️</span>
+                    Yazım Kılavuzu
+                  </a>
+                </div>
+                <div class="download-info">
+                  <span>🎓</span>
+                  <span>95 sayfa • Lisansüstü öğrenciler için temel</span>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
   <section id="projects">
-    <h2 class="section-title">Projeler</h2>
-    <div class="cards-grid">
-      <div class="card fade-in">
-        <div class="card-date">2025</div>
-        <h3>
-          <div class="card-icon">🔬</div>
-          RBS Simülasyon Analizi
-        </h3>
-        <p>Rutherford geri saçılım spektroskopi verilerinde derin öğrenme algoritmaları kullanarak malzeme karakterizasyonu yapmaktayım.</p>
-      </div>
-      <div class="card fade-in">
-        <div class="card-date">2024</div>
-        <h3>
-          <div class="card-icon">📱</div>
-          Fotodetektör AI Analizi
-        </h3>
-        <p>Fotodetektör karakterizasyonunda yapay zeka destekli analiz sistemleri geliştirdim. Cihaz performansını optimize etmek için makine öğrenimi kullandım.</p>
-      </div>
-    </div>
-  </section>
+        <div class="lang-content" id="projects-en">
+            <h2 class="section-title">Current Projects</h2>
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <div class="card-date">2025</div>
+                    <h3>
+                        <div class="card-icon">🔬</div>
+                        RBS Simulation Analysis
+                    </h3>
+                    <p>Applying deep learning algorithms to Rutherford backscattering spectroscopy data for advanced material characterization and automated analysis of material composition and structural properties.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="card-date">2024</div>
+                    <h3>
+                        <div class="card-icon">📱</div>
+                        Photodetector AI Analysis
+                    </h3>
+                    <p>Developed AI-assisted analysis systems for photodetector characterization. Using machine learning algorithms to optimize device performance and predict optimal operating conditions.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="card-date">2024</div>
+                    <h3>
+                        <div class="card-icon">🌐</div>
+                        Smart Materials Database
+                    </h3>
+                    <p>Creating an intelligent database system for nanomaterials using machine learning for property prediction and material recommendation based on desired characteristics.</p>
+                </div>
+            </div>
+        </div>
+        <div class="lang-content" id="projects-tr">
+            <h2 class="section-title">Güncel Projeler</h2>
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <div class="card-date">2025</div>
+                    <h3>
+                        <div class="card-icon">🔬</div>
+                        RBS Simülasyon Analizi
+                    </h3>
+                    <p>İleri malzeme karakterizasyonu ve malzeme bileşimi ile yapısal özelliklerin otomatik analizi için Rutherford geri saçılma spektroskopisi verilerine derin öğrenme algoritmaları uygulanması.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="card-date">2024</div>
+                    <h3>
+                        <div class="card-icon">📱</div>
+                        Fotodedektör YZ Analizi
+                    </h3>
+                    <p>Fotodedektör karakterizasyonu için yapay zeka destekli analiz sistemleri geliştirildi. Cihaz performansını optimize etmek ve en uygun çalışma koşullarını tahmin etmek için makine öğrenmesi algoritmaları kullanılıyor.</p>
+                </div>
+                <div class="card fade-in">
+                    <div class="card-date">2024</div>
+                    <h3>
+                        <div class="card-icon">🌐</div>
+                        Akıllı Malzemeler Veritabanı
+                    </h3>
+                    <p>İstenen özelliklere dayalı olarak özellik tahmini ve malzeme önerisi için makine öğrenmesini kullanarak nanomalzemeler için akıllı bir veritabanı sistemi oluşturulması.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- İLETİŞİM -->
   <section id="contact">
-    <h2 class="section-title">İletişim</h2>
+    <h2 class="section-title">Contact Information</h2>
     <div class="contact-grid">
       <a href="mailto:sunal@kastamonu.edu.tr" class="contact-item">
         <div class="contact-icon">📧</div>
         <div>
-          <div style="font-weight: 600;">E-posta</div>
+          <div style="font-weight: 600;">Email</div>
           <div style="color: #64748B;">sunal@kastamonu.edu.tr</div>
         </div>
       </a>
-      <a href="https://linkedin.com" target="_blank" class="contact-item">
+      <a href="https://www.linkedin.com/in/selimunal/" target="_blank" class="contact-item">
         <div class="contact-icon">💼</div>
         <div>
           <div style="font-weight: 600;">LinkedIn</div>
-          <div style="color: #64748B;">Profesyonel Profil</div>
+          <div style="color: #64748B;">Professional Profile</div>
         </div>
       </a>
-      <a href="https://researchgate.net" target="_blank" class="contact-item">
+      <a href="https://www.researchgate.net/profile/Selim-Unal" target="_blank" class="contact-item">
         <div class="contact-icon">🔬</div>
         <div>
           <div style="font-weight: 600;">ResearchGate</div>
-          <div style="color: #64748B;">Araştırma Ağı</div>
+          <div style="color: #64748B;">Research Network</div>
         </div>
       </a>
-      <a href="https://orcid.org" target="_blank" class="contact-item">
+      <a href="https://orcid.org/0000-0003-1521-3327" target="_blank" class="contact-item">
         <div class="contact-icon">🆔</div>
         <div>
           <div style="font-weight: 600;">ORCID</div>
-          <div style="color: #64748B;">Akademik Kimlik</div>
+          <div style="color: #64748B;">Academic Identity</div>
         </div>
       </a>
+      <div class="contact-item" style="pointer-events: none;">
+        <div class="contact-icon">🏢</div>
+        <div>
+          <div style="font-weight: 600;">Office</div>
+          <div style="color: #64748B;">Kastamonu University<br>Faculty of Engineering</div>
+        </div>
+      </div>
+      <div class="contact-item" style="pointer-events: none;">
+        <div class="contact-icon">⏰</div>
+        <div>
+          <div style="font-weight: 600;">Office Hours</div>
+          <div style="color: #64748B;">Mon-Fri: 9:00-17:00<br>By appointment</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Dr. Selim Ünal | Tüm Hakları Saklıdır</p>
+    <p>&copy; 2025 Dr. Selim Ünal | All Rights Reserved</p>
+    <p style="margin-top: 0.5rem; font-size: 0.875rem;">Kastamonu University • Faculty of Engineering</p>
   </footer>
 
-  <!-- JavaScript -->
   <script>
+    // Language switching function
+    function switchLanguage(lang) {
+      // Deactivate all language buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Activate the clicked language button
+      document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
+
+      // Hide all language-specific content
+      document.querySelectorAll('.lang-content').forEach(content => {
+        content.classList.remove('active', 'show');
+      });
+
+      // Show the content for the selected language
+      document.querySelectorAll(`#nav-${lang}, #hero-${lang}, #about-${lang}, #research-${lang}, #publications-${lang}, #teaching-${lang}, #class-notes-${lang}, #projects-${lang}`).forEach(content => {
+        content.classList.add('active');
+        // A short delay to allow the 'display' property to apply before adding the animation class
+        setTimeout(() => content.classList.add('show'), 10);
+      });
+    }
+  
+    // Set the initial language on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      switchLanguage('en'); // Default to English
+    });
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('nav a, .hero-cta').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -732,6 +1542,24 @@
       if (hero && scrolled < window.innerHeight) {
         hero.style.transform = `translateY(${scrolled * 0.5}px)`;
       }
+    });
+
+    // Download tracking (optional)
+    document.querySelectorAll('a[href$=".pdf"], a[href$=".zip"]').forEach(link => {
+      link.addEventListener('click', function() {
+        console.log('Download initiated:', this.href);
+        // You can add analytics tracking here if needed
+      });
+    });
+
+    // Notification signup for coming soon items
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.textContent.trim().includes('Get Notified') || this.textContent.trim().includes('Bildirim Al')) {
+          e.preventDefault();
+          alert('Please send an email to sunal@kastamonu.edu.tr to be notified when this content becomes available.');
+        }
+      });
     });
   </script>
 
