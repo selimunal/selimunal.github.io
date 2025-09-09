@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dr. Selim Ünal | Machine Learning, Nanotechnology and Data Science Expert">
+  <title>Dr. Selim Ünal - Academic Portfolio</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #0F172A;
+      --secondary-color: #1E293B;
+      --accent-color: #3B82F6;
+      --accent-hover: #2563EB;
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-dark: #1E293B;
+      --surface: #1E293B;
+      --surface-light: #334155;
+      --gradient-bg: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+      background: var(--gradient-bg);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+      animation: backgroundShift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.1) rotate(1deg); }
+    }
+
+    /* Header */
+    header {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-primary);
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    nav a:hover::after {
+      width: 80%;
+    }
+
+    /* Mobile menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #F8FAFC, #CBD5E1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: var(--accent-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .hero-cta:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Sections */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), #8B5CF6);
+      border-radius: 2px;
+      transform: translateX(-50%);
+    }
+
+    /* Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-color), #8B5CF6);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--accent-color), #8B5CF6);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.875rem;
+    }
+
+    .card p {
+      color: #64748B;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-date {
+      font-size: 0.875rem;
+      color: var(--accent-color);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent-color);
+      color: white;
+    }
+
+    /* About section special styling */
+    .about-content {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-color), #8B5CF6);
+    }
+
+    .about-content p {
+      font-size: 1.125rem;
+      color: #64748B;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    /* Contact section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text-dark);
+    }
+
+    .contact-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-color), #8B5CF6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.25rem;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 0 1rem;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding: 4rem 1rem 2rem;
+      }
+
+      section {
+        padding: 3rem 1rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-content {
+        padding: 2rem;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Loading animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-content">
+      <a href="#" class="logo">Dr. Selim Ünal</a>
+      <nav id="nav">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1 class="hero-title">Dr. Selim Ünal</h1>
+    <p class="hero-subtitle">Machine Learning, Nanotechnology and Data Science Expert</p>
+    <a href="#contact" class="hero-cta">
+      <span>Get in Touch</span>
+      <span>→</span>
+    </a>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <div class="about-content fade-in">
+      <p>I am a faculty member at Kastamonu University. My research focuses on machine learning, deep learning, nanotechnology and data science. I explore applications of artificial intelligence technologies in materials science and optoelectronics, contributing to the development of next-generation technologies.</p>
+      <a class="btn" href="CV.pdf" target="_blank">
+        <span>📄</span>
+        Download CV
+      </a>
+    </div>
+  </section>
+
+  <!-- ARAŞTIRMALAR -->
+  <section id="research">
+    <h2 class="section-title">Araştırmalar</h2>
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <h3>
+          <div class="card-icon">📈</div>
+          Zaman Serisi Analizi
+        </h3>
+        <p>Yapay zeka temelli tahmin modelleri geliştirerek karmaşık zaman serisi verilerinin analizini yapıyorum. LSTM, ARIMA ve hibrit modeller kullanarak gelecek değerleri tahmin etme konusunda uzmanlaşmış durumdayım.</p>
+      </div>
+      <div class="card fade-in">
+        <h3>
+          <div class="card-icon">⚛️</div>
+          Nanomalzemeler
+        </h3>
+        <p>Yapay zeka algoritmaları kullanarak nanomalzemelerin özelliklerini tahmin etme ve optimizasyon çalışmaları yürütüyorum. Malzeme özelliklerini önceden belirleme konusunda makine öğrenimi tekniklerini kullanıyorum.</p>
+      </div>
+      <div class="card fade-in">
+        <h3>
+          <div class="card-icon">💡</div>
+          Optoelektronik
+        </h3>
+        <p>Fotodetektörler ve polimer tabanlı cihazlar üzerinde çalışmalar yapıyorum. Optoelektronik cihazların performansını artırmak için yenilikçi yaklaşımlar geliştiriyorum.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- YAYINLAR -->
+  <section id="publications">
+    <h2 class="section-title">Yayınlar</h2>
+    <div class="card fade-in">
+      <h3>
+        <div class="card-icon">🎓</div>
+        Akademik Yayınlar
+      </h3>
+      <p>Makine öğrenimi, nanoteknoloji ve veri bilimi alanlarında yayımlanmış makalelerim ve araştırmalarım hakkında detaylı bilgi için Google Scholar profilimi ziyaret edebilirsiniz.</p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="https://scholar.google.com" target="_blank" class="btn">
+          <span>🔗</span>
+          Google Scholar
+        </a>
+        <a href="#" class="btn btn-secondary">
+          <span>📄</span>
+          Yayın Listesi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DERSLER -->
+  <section id="teaching">
+    <h2 class="section-title">Dersler</h2>
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <h3>
+          <div class="card-icon">🤖</div>
+          Makine Öğrenimi
+        </h3>
+        <p>Temel makine öğrenimi algoritmalarından derin öğrenme tekniklerine kadar geniş bir yelpazede eğitim veriyorum. Teorik bilgiyi pratik uygulamalarla destekliyorum.</p>
+        <a class="btn" href="dersnotlari.pdf" target="_blank">
+          <span>📚</span>
+          Ders Notları İndir
+        </a>
+      </div>
+      <div class="card fade-in">
+        <h3>
+          <div class="card-icon">📊</div>
+          Veri Bilimi
+        </h3>
+        <p>Veri analizi, istatistiksel modelleme ve büyük veri işleme teknikleri konularında kapsamlı eğitimler düzenliyorum.</p>
+        <a class="btn btn-secondary" href="#contact">
+          <span>💬</span>
+          Bilgi Al
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJELER -->
+  <section id="projects">
+    <h2 class="section-title">Projeler</h2>
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <div class="card-date">2025</div>
+        <h3>
+          <div class="card-icon">🔬</div>
+          RBS Simülasyon Analizi
+        </h3>
+        <p>Rutherford geri saçılım spektroskopi verilerinde derin öğrenme algoritmaları kullanarak malzeme karakterizasyonu yapmaktayım.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-date">2024</div>
+        <h3>
+          <div class="card-icon">📱</div>
+          Fotodetektör AI Analizi
+        </h3>
+        <p>Fotodetektör karakterizasyonunda yapay zeka destekli analiz sistemleri geliştirdim. Cihaz performansını optimize etmek için makine öğrenimi kullandım.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- İLETİŞİM -->
+  <section id="contact">
+    <h2 class="section-title">İletişim</h2>
+    <div class="contact-grid">
+      <a href="mailto:sunal@kastamonu.edu.tr" class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div style="font-weight: 600;">E-posta</div>
+          <div style="color: #64748B;">sunal@kastamonu.edu.tr</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-item">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div style="font-weight: 600;">LinkedIn</div>
+          <div style="color: #64748B;">Profesyonel Profil</div>
+        </div>
+      </a>
+      <a href="https://researchgate.net" target="_blank" class="contact-item">
+        <div class="contact-icon">🔬</div>
+        <div>
+          <div style="font-weight: 600;">ResearchGate</div>
+          <div style="color: #64748B;">Araştırma Ağı</div>
+        </div>
+      </a>
+      <a href="https://orcid.org" target="_blank" class="contact-item">
+        <div class="contact-icon">🆔</div>
+        <div>
+          <div style="font-weight: 600;">ORCID</div>
+          <div style="color: #64748B;">Akademik Kimlik</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Dr. Selim Ünal | Tüm Hakları Saklıdır</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a, .hero-cta').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('active');
+    }
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('nav').classList.remove('active');
+      });
+    });
+
+    // Fade in animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Header background change on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(15, 23, 42, 0.98)';
+      } else {
+        header.style.background = 'rgba(15, 23, 42, 0.95)';
+      }
+    });
+
+    // Add loading state
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero');
+      if (hero && scrolled < window.innerHeight) {
+        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
+  </script>
+
+</body>
+</html>
