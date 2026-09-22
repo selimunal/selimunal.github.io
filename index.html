@@ -42,6 +42,8 @@
             --shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --success-color: #10B981;
             --warning-color: #F59E0B;
+            --pdf-color: #DC2626;
+            --pptx-color: #D24726;
         }
 
         body {
@@ -161,6 +163,11 @@
             gap: 2.5rem;
         }
 
+        nav .lang-content.active {
+            display: flex;
+            gap: 2.5rem;
+        }
+
         nav a {
             color: var(--text-secondary);
             text-decoration: none;
@@ -226,6 +233,13 @@
             animation: fadeInUp 1s ease-out 0.2s both;
         }
 
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .hero-cta {
             display: inline-flex;
             align-items: center;
@@ -239,13 +253,27 @@
             font-size: 0.95rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+            border: 2px solid var(--accent-color);
             animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         .hero-cta:hover {
             background: var(--accent-hover);
+            border-color: var(--accent-hover);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .hero-cta.hero-cta-ghost {
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: none;
+            color: var(--text-primary);
+        }
+
+        .hero-cta.hero-cta-ghost:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-color);
         }
 
         @keyframes fadeInUp {
@@ -264,6 +292,7 @@
             padding: 3.5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            scroll-margin-top: 80px;
         }
 
         .section-title {
@@ -283,6 +312,14 @@
             background: var(--accent-color);
             border-radius: 2px;
             margin: 1rem auto 0;
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 640px;
+            margin: -1.25rem auto 2.5rem;
+            font-size: 1rem;
         }
 
         /* Cards */
@@ -394,6 +431,15 @@
             color: white;
         }
 
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-sm.btn-secondary {
+            padding: calc(0.5rem - 2px) calc(1rem - 2px);
+        }
+
         /* About section */
         .about-content {
             background: var(--card-bg);
@@ -422,6 +468,176 @@
             color: #64748B;
             margin-bottom: 1.5rem;
             line-height: 1.8;
+        }
+
+        /* ===== Lecture Notes ===== */
+        .course-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .course {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+        }
+
+        .course-info {
+            background: var(--secondary-color);
+            color: var(--text-primary);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .course-code {
+            font-size: 0.85rem;
+            color: #93C5FD;
+            font-weight: 600;
+        }
+
+        .course-info h3 {
+            font-size: 1.35rem;
+            line-height: 1.3;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .course-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .course-count {
+            margin-top: auto;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .material-list {
+            list-style: none;
+            padding: 0.5rem 0;
+        }
+
+        .material {
+            display: grid;
+            grid-template-columns: 56px 1fr auto;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid #E2E8F0;
+            transition: background 0.2s ease;
+        }
+
+        .material:last-child {
+            border-bottom: none;
+        }
+
+        .material:hover {
+            background: #F1F5F9;
+        }
+
+        .file-badge {
+            width: 56px;
+            height: 64px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 0.5rem;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            position: relative;
+            clip-path: polygon(0 0, 72% 0, 100% 22%, 100% 100%, 0 100%);
+        }
+
+        .file-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 28%;
+            height: 22%;
+            background: rgba(255, 255, 255, 0.35);
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+        }
+
+        .file-badge .file-glyph {
+            font-size: 1.3rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .file-badge.pdf { background: var(--pdf-color); }
+        .file-badge.pptx { background: var(--pptx-color); }
+
+        .material-body h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+            line-height: 1.4;
+        }
+
+        .material-body p {
+            color: #64748B;
+            font-size: 0.875rem;
+            line-height: 1.55;
+        }
+
+        .material-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .tag.tag-neutral {
+            background: #E2E8F0;
+            color: #334155;
+        }
+
+        .material-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .lectures-footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .lectures-footer a {
+            color: #93C5FD;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .lectures-footer a:hover {
+            text-decoration: underline;
         }
 
         /* Contact section */
@@ -491,15 +707,10 @@
             transform: translateX(0);
         }
 
-        @keyframes slideInFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        /* Keyboard focus */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #60A5FA;
+            outline-offset: 3px;
         }
 
         /* Responsive Design */
@@ -530,6 +741,11 @@
                 display: flex;
             }
 
+            nav .lang-content.active {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
             .mobile-menu-btn {
                 display: block;
             }
@@ -553,6 +769,46 @@
             .about-content {
                 padding: 1.75rem;
             }
+
+            .course {
+                grid-template-columns: 1fr;
+            }
+
+            .course-info {
+                border-left: none;
+                border-top: 4px solid var(--accent-color);
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .material {
+                grid-template-columns: 48px 1fr;
+                padding: 1.25rem;
+                gap: 1rem;
+            }
+
+            .file-badge {
+                width: 48px;
+                height: 56px;
+            }
+
+            .material-actions {
+                grid-column: 1 / -1;
+            }
+
+            .material-actions .btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+            html { scroll-behavior: auto; }
         }
 
         /* Smooth scrolling */
@@ -590,6 +846,7 @@
                     <a href="#research">Research</a>
                     <a href="#publications">Publications</a>
                     <a href="#projects">Projects</a>
+                    <a href="#lectures">Lecture Notes</a>
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="lang-content" id="nav-tr">
@@ -597,10 +854,11 @@
                     <a href="#research">Araştırma</a>
                     <a href="#publications">Yayınlar</a>
                     <a href="#projects">Projeler</a>
+                    <a href="#lectures">Ders Notları</a>
                     <a href="#contact">İletişim</a>
                 </div>
             </nav>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">☰</button>
         </div>
     </header>
 
@@ -608,12 +866,18 @@
         <div class="lang-content" id="hero-en">
             <h1 class="hero-title">Dr. Selim Ünal</h1>
             <p class="hero-subtitle">Machine Learning • Nanotechnology • Data Science</p>
-            <a href="#contact" class="hero-cta">Get in Touch →</a>
+            <div class="hero-actions">
+                <a href="#contact" class="hero-cta">Get in Touch →</a>
+                <a href="#lectures" class="hero-cta hero-cta-ghost">Lecture Notes</a>
+            </div>
         </div>
         <div class="lang-content" id="hero-tr">
             <h1 class="hero-title">Dr. Selim Ünal</h1>
             <p class="hero-subtitle">Makine Öğrenmesi • Nanoteknoloji • Veri Bilimi</p>
-            <a href="#contact" class="hero-cta">İletişime Geç →</a>
+            <div class="hero-actions">
+                <a href="#contact" class="hero-cta">İletişime Geç →</a>
+                <a href="#lectures" class="hero-cta hero-cta-ghost">Ders Notları</a>
+            </div>
         </div>
     </section>
 
@@ -784,6 +1048,184 @@
         </div>
     </section>
 
+    <!-- ===================== LECTURE NOTES ===================== -->
+    <!--
+        To add a new file: copy one <li class="material"> block inside the right course,
+        then update the title, description and the two links.
+        - PDF "View" link: the GitHub page (github.com/.../blob/main/FILE.pdf)
+        - PPTX "View" link: https://view.officeapps.live.com/op/view.aspx?src= + URL-encoded raw link
+        - "Download" link: raw.githubusercontent.com/selimunal/documents/main/FILE
+    -->
+    <section id="lectures">
+        <div class="lang-content" id="lectures-en">
+            <h2 class="section-title">Lecture Notes</h2>
+            <p class="section-intro">Slides and lab sheets for the courses I teach. Open them in your browser or download a copy. Course materials are in Turkish.</p>
+
+            <div class="course-list">
+                <!-- Course: Sensor Technologies -->
+                <article class="course fade-in">
+                    <div class="course-info">
+                        <span class="course-code">Course</span>
+                        <h3>Sensor Technologies and Data Acquisition</h3>
+                        <p>Sensor principles, measurement, and collecting and processing sensor data with Python.</p>
+                        <span class="course-count">2 files</span>
+                    </div>
+                    <ul class="material-list">
+                        <li class="material">
+                            <div class="file-badge pptx" aria-hidden="true"><span class="file-glyph">▤</span>PPTX</div>
+                            <div class="material-body">
+                                <h4>Week 1: Introduction to Sensor Technologies and Data Acquisition</h4>
+                                <p>Opening lecture slides for the course.</p>
+                                <div class="material-tags">
+                                    <span class="tag">Week 1</span>
+                                    <span class="tag tag-neutral">Slides</span>
+                                </div>
+                            </div>
+                            <div class="material-actions">
+                                <a class="btn btn-sm" target="_blank" rel="noopener"
+                                   href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fselimunal%2Fdocuments%2Fmain%2FSens%25C3%25B6r%2520Teknolojileri%2520ve%2520Veri%2520Toplama%2520%25E2%2580%2593%25201.%2520Hafta.pptx">View</a>
+                                <a class="btn btn-sm btn-secondary" target="_blank" rel="noopener"
+                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Sens%C3%B6r%20Teknolojileri%20ve%20Veri%20Toplama%20%E2%80%93%201.%20Hafta.pptx">Download</a>
+                            </div>
+                        </li>
+                        <li class="material">
+                            <div class="file-badge pdf" aria-hidden="true"><span class="file-glyph">▤</span>PDF</div>
+                            <div class="material-body">
+                                <h4>Python Lab Sheet</h4>
+                                <p>Hands-on Python exercises for reading, processing and visualizing sensor data.</p>
+                                <div class="material-tags">
+                                    <span class="tag">Lab</span>
+                                    <span class="tag tag-neutral">Python</span>
+                                </div>
+                            </div>
+                            <div class="material-actions">
+                                <a class="btn btn-sm" target="_blank" rel="noopener"
+                                   href="https://github.com/selimunal/documents/blob/main/Sensor_Teknolojileri_Python_Uygulama_Foyu_Son_v3_image.pdf">View</a>
+                                <a class="btn btn-sm btn-secondary" target="_blank" rel="noopener"
+                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Sensor_Teknolojileri_Python_Uygulama_Foyu_Son_v3_image.pdf">Download</a>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- Course: Internet of Things -->
+                <article class="course fade-in">
+                    <div class="course-info">
+                        <span class="course-code">Course</span>
+                        <h3>Internet of Things</h3>
+                        <p>IoT architectures, connected devices, communication protocols and applications.</p>
+                        <span class="course-count">1 file</span>
+                    </div>
+                    <ul class="material-list">
+                        <li class="material">
+                            <div class="file-badge pptx" aria-hidden="true"><span class="file-glyph">▤</span>PPTX</div>
+                            <div class="material-body">
+                                <h4>Internet of Things: Complete Course Slides</h4>
+                                <p>A 100-slide deck covering the full course.</p>
+                                <div class="material-tags">
+                                    <span class="tag">Full course</span>
+                                    <span class="tag tag-neutral">100 slides</span>
+                                </div>
+                            </div>
+                            <div class="material-actions">
+                                <a class="btn btn-sm" target="_blank" rel="noopener"
+                                   href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fselimunal%2Fdocuments%2Fmain%2FNesnelerin-Interneti-100-Slayt.pptx">View</a>
+                                <a class="btn btn-sm btn-secondary" target="_blank" rel="noopener"
+                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Nesnelerin-Interneti-100-Slayt.pptx">Download</a>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+
+            <p class="lectures-footer">All materials are also available in the <a href="https://github.com/selimunal/documents" target="_blank" rel="noopener">GitHub repository</a>.</p>
+        </div>
+
+        <div class="lang-content" id="lectures-tr">
+            <h2 class="section-title">Ders Notları</h2>
+            <p class="section-intro">Verdiğim derslere ait sunumlar ve uygulama föyleri. Tarayıcıda açabilir veya indirebilirsiniz.</p>
+
+            <div class="course-list">
+                <!-- Ders: Sensör Teknolojileri -->
+                <article class="course fade-in">
+                    <div class="course-info">
+                        <span class="course-code">Ders</span>
+                        <h3>Sensör Teknolojileri ve Veri Toplama</h3>
+                        <p>Sensör prensipleri, ölçüm ve Python ile sensör verisinin toplanması ve işlenmesi.</p>
+                        <span class="course-count">2 dosya</span>
+                    </div>
+                    <ul class="material-list">
+                        <li class="material">
+                            <div class="file-badge pptx" aria-hidden="true"><span class="file-glyph">▤</span>PPTX</div>
+                            <div class="material-body">
+                                <h4>1. Hafta: Sensör Teknolojileri ve Veri Toplamaya Giriş</h4>
+                                <p>Dersin açılış sunumu.</p>
+                                <div class="material-tags">
+                                    <span class="tag">1. Hafta</span>
+                                    <span class="tag tag-neutral">Sunum</span>
+                                </div>
+                            </div>
+                            <div class="material-actions">
+                                <a class="btn btn-sm" target="_blank" rel="noopener"
+                                   href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fselimunal%2Fdocuments%2Fmain%2FSens%25C3%25B6r%2520Teknolojileri%2520ve%2520Veri%2520Toplama%2520%25E2%2580%2593%25201.%2520Hafta.pptx">Görüntüle</a>
+                                <a class="btn btn-sm btn-secondary" target="_blank" rel="noopener"
+                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Sens%C3%B6r%20Teknolojileri%20ve%20Veri%20Toplama%20%E2%80%93%201.%20Hafta.pptx">İndir</a>
+                            </div>
+                        </li>
+                        <li class="material">
+                            <div class="file-badge pdf" aria-hidden="true"><span class="file-glyph">▤</span>PDF</div>
+                            <div class="material-body">
+                                <h4>Python Uygulama Föyü</h4>
+                                <p>Sensör verisini okuma, işleme ve görselleştirme üzerine uygulamalı Python çalışmaları.</p>
+                                <div class="material-tags">
+                                    <span class="tag">Uygulama</span>
+                                    <span class="tag tag-neutral">Python</span>
+                                </div>
+                            </div>
+                            <div class="material-actions">
+                                <a class="btn btn-sm" target="_blank" rel="noopener"
+                                   href="https://github.com/selimunal/documents/blob/main/Sensor_Teknolojileri_Python_Uygulama_Foyu_Son_v3_image.pdf">Görüntüle</a>
+                                <a class="btn btn-sm btn-secondary" target="_blank" rel="noopener"
+                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Sensor_Teknolojileri_Python_Uygulama_Foyu_Son_v3_image.pdf">İndir</a>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- Ders: Nesnelerin İnterneti -->
+                <article class="course fade-in">
+                    <div class="course-info">
+                        <span class="course-code">Ders</span>
+                        <h3>Nesnelerin İnterneti</h3>
+                        <p>IoT mimarileri, bağlı cihazlar, haberleşme protokolleri ve uygulamalar.</p>
+                        <span class="course-count">1 dosya</span>
+                    </div>
+                    <ul class="material-list">
+                        <li class="material">
+                            <div class="file-badge pptx" aria-hidden="true"><span class="file-glyph">▤</span>PPTX</div>
+                            <div class="material-body">
+                                <h4>Nesnelerin İnterneti: Tüm Ders Sunumu</h4>
+                                <p>Dersin tamamını kapsayan 100 slaytlık sunum.</p>
+                                <div class="material-tags">
+                                    <span class="tag">Tüm ders</span>
+                                    <span class="tag tag-neutral">100 slayt</span>
+                                </div>
+                            </div>
+                            <div class="material-actions">
+                                <a class="btn btn-sm" target="_blank" rel="noopener"
+                                   href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fraw.githubusercontent.com%2Fselimunal%2Fdocuments%2Fmain%2FNesnelerin-Interneti-100-Slayt.pptx">Görüntüle</a>
+                                <a class="btn btn-sm btn-secondary" target="_blank" rel="noopener"
+                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Nesnelerin-Interneti-100-Slayt.pptx">İndir</a>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+
+            <p class="lectures-footer">Tüm materyaller <a href="https://github.com/selimunal/documents" target="_blank" rel="noopener">GitHub deposunda</a> da bulunmaktadır.</p>
+        </div>
+    </section>
+
     <section id="contact">
         <h2 class="section-title">Contact Information</h2>
         <div class="contact-grid">
@@ -834,10 +1276,32 @@
                 content.classList.remove('active');
             });
 
-            document.querySelectorAll(`#nav-${lang}, #hero-${lang}, #about-${lang}, #research-${lang}, #publications-${lang}, #projects-${lang}`).forEach(content => {
+            document.querySelectorAll(`#nav-${lang}, #hero-${lang}, #about-${lang}, #research-${lang}, #publications-${lang}, #projects-${lang}, #lectures-${lang}`).forEach(content => {
                 content.classList.add('active');
             });
+
+            document.documentElement.lang = lang;
+
+            // Elements in the newly shown language must be revealed too
+            document.querySelectorAll('.lang-content.active .fade-in').forEach(el => observer.observe(el));
         }
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
     
         document.addEventListener('DOMContentLoaded', () => {
             switchLanguage('en');
@@ -860,23 +1324,6 @@
         function toggleMenu() {
             document.getElementById('nav').classList.toggle('active');
         }
-
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
     </script>
 
 </body>
