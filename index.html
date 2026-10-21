@@ -1275,21 +1275,35 @@
     <script>
         const LANG_STORAGE_KEY = 'preferredLang';
 
+        // Is the visitor in Turkey? Checked in the browser, without any external service:
+        // the device time zone (Europe/Istanbul) or a TR region in the browser locale (e.g. tr-TR, en-TR).
+        function isInTurkey(browserLangs) {
+            try {
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+                if (tz === 'Europe/Istanbul' || tz === 'Asia/Istanbul' || tz === 'Turkey') return true;
+            } catch (e) { /* Intl not available */ }
+            return browserLangs.some(l => /[-_]tr$/i.test(String(l)));
+        }
+
         // Pick the starting language:
         // 1) a language the visitor chose earlier with the EN/TR buttons,
-        // 2) otherwise English if the browser's main language is English,
-        // 3) otherwise Turkish.
+        // 2) Turkish if the browser's main language is Turkish,
+        // 3) Turkish if the visitor is in Turkey (time zone or locale region),
+        // 4) otherwise English.
         function detectLanguage() {
             try {
                 const saved = localStorage.getItem(LANG_STORAGE_KEY);
                 if (saved === 'en' || saved === 'tr') return saved;
-            } catch (e) { /* storage blocked: fall through to browser language */ }
+            } catch (e) { /* storage blocked: fall through to detection */ }
 
             const browserLangs = (navigator.languages && navigator.languages.length)
-                ? navigator.languages
+                ? Array.from(navigator.languages)
                 : [navigator.language || navigator.userLanguage || ''];
             const primary = String(browserLangs[0] || '').toLowerCase();
-            return primary.startsWith('en') ? 'en' : 'tr';
+
+            if (primary.startsWith('tr')) return 'tr';
+            if (isInTurkey(browserLangs)) return 'tr';
+            return 'en';
         }
 
         // Called by the EN/TR buttons: switch and remember the choice
