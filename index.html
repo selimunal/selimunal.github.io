@@ -836,8 +836,8 @@
             <div class="header-left">
                 <a href="#" class="logo">Dr. Selim Ünal</a>
                 <div class="language-switcher">
-                    <button class="lang-btn active" onclick="switchLanguage('en')" data-lang="en">EN</button>
-                    <button class="lang-btn" onclick="switchLanguage('tr')" data-lang="tr">TR</button>
+                    <button class="lang-btn" onclick="chooseLanguage('en')" data-lang="en">EN</button>
+                    <button class="lang-btn" onclick="chooseLanguage('tr')" data-lang="tr">TR</button>
                 </div>
             </div>
             <nav id="nav">
@@ -1091,7 +1091,7 @@
                         <li class="material">
                             <div class="file-badge pdf" aria-hidden="true"><span class="file-glyph">▤</span>PDF</div>
                             <div class="material-body">
-                                <h4>Python Lab Sheet</h4>
+                                <h4>Sensor Technologies and Data Acquisition with Python Applications</h4>
                                 <p>Hands-on Python exercises for reading, processing and visualizing sensor data.</p>
                                 <div class="material-tags">
                                     <span class="tag">Lab</span>
@@ -1100,9 +1100,9 @@
                             </div>
                             <div class="material-actions">
                                 <a class="btn btn-sm" target="_blank" rel="noopener"
-                                   href="https://github.com/selimunal/documents/blob/main/Sensor_Teknolojileri_Python_Uygulama_Foyu_Son_v3_image.pdf">View</a>
+                                   href="https://github.com/selimunal/documents/blob/main/Sens%C3%B6r_Teknolojileri_ve_Veri_Toplama.pdf">View</a>
                                 <a class="btn btn-sm btn-secondary" target="_blank" rel="noopener"
-                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Sensor_Teknolojileri_Python_Uygulama_Foyu_Son_v3_image.pdf">Download</a>
+                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Sens%C3%B6r_Teknolojileri_ve_Veri_Toplama.pdf">Download</a>
                             </div>
                         </li>
                     </ul>
@@ -1175,7 +1175,7 @@
                         <li class="material">
                             <div class="file-badge pdf" aria-hidden="true"><span class="file-glyph">▤</span>PDF</div>
                             <div class="material-body">
-                                <h4>Python Uygulama Föyü</h4>
+                                <h4>Python Uygulamalarıyla Sensör Teknolojileri ve Veri Toplama</h4>
                                 <p>Sensör verisini okuma, işleme ve görselleştirme üzerine uygulamalı Python çalışmaları.</p>
                                 <div class="material-tags">
                                     <span class="tag">Uygulama</span>
@@ -1184,9 +1184,9 @@
                             </div>
                             <div class="material-actions">
                                 <a class="btn btn-sm" target="_blank" rel="noopener"
-                                   href="https://github.com/selimunal/documents/blob/main/Sensor_Teknolojileri_Python_Uygulama_Foyu_Son_v3_image.pdf">Görüntüle</a>
+                                   href="https://github.com/selimunal/documents/blob/main/Sens%C3%B6r_Teknolojileri_ve_Veri_Toplama.pdf">Görüntüle</a>
                                 <a class="btn btn-sm btn-secondary" target="_blank" rel="noopener"
-                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Sensor_Teknolojileri_Python_Uygulama_Foyu_Son_v3_image.pdf">İndir</a>
+                                   href="https://raw.githubusercontent.com/selimunal/documents/main/Sens%C3%B6r_Teknolojileri_ve_Veri_Toplama.pdf">İndir</a>
                             </div>
                         </li>
                     </ul>
@@ -1257,6 +1257,13 @@
                     <div style="color: #64748B; font-size: 0.85rem;">Academic Identity</div>
                 </div>
             </a>
+            <a href="https://github.com/selimunal" target="_blank" rel="noopener" class="contact-item">
+                <div class="contact-icon">&lt;/&gt;</div>
+                <div>
+                    <div style="font-weight: 600; font-size: 0.95rem;">GitHub</div>
+                    <div style="color: #64748B; font-size: 0.85rem;">github.com/selimunal</div>
+                </div>
+            </a>
         </div>
     </section>
 
@@ -1266,6 +1273,31 @@
     </footer>
 
     <script>
+        const LANG_STORAGE_KEY = 'preferredLang';
+
+        // Pick the starting language:
+        // 1) a language the visitor chose earlier with the EN/TR buttons,
+        // 2) otherwise English if the browser's main language is English,
+        // 3) otherwise Turkish.
+        function detectLanguage() {
+            try {
+                const saved = localStorage.getItem(LANG_STORAGE_KEY);
+                if (saved === 'en' || saved === 'tr') return saved;
+            } catch (e) { /* storage blocked: fall through to browser language */ }
+
+            const browserLangs = (navigator.languages && navigator.languages.length)
+                ? navigator.languages
+                : [navigator.language || navigator.userLanguage || ''];
+            const primary = String(browserLangs[0] || '').toLowerCase();
+            return primary.startsWith('en') ? 'en' : 'tr';
+        }
+
+        // Called by the EN/TR buttons: switch and remember the choice
+        function chooseLanguage(lang) {
+            switchLanguage(lang);
+            try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (e) {}
+        }
+
         function switchLanguage(lang) {
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -1304,7 +1336,7 @@
         });
     
         document.addEventListener('DOMContentLoaded', () => {
-            switchLanguage('en');
+            switchLanguage(detectLanguage());
         });
 
         document.querySelectorAll('nav a, .hero-cta').forEach(anchor => {
