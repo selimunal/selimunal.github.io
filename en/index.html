@@ -283,7 +283,6 @@
             color: var(--text-secondary);
             margin-bottom: 2rem;
             font-weight: 400;
-            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .hero-subtitle span {
@@ -311,7 +310,6 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
             border: 2px solid var(--accent-color);
-            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         .hero-cta:hover {
@@ -331,17 +329,6 @@
         .hero-cta.hero-cta-ghost:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: var(--accent-color);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         /* Sections */
@@ -932,7 +919,7 @@
         .js-ready .fade-in {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .js-ready .fade-in.visible {
@@ -1245,8 +1232,12 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
-            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+            }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.fade-in').forEach(el => {
+                // anything already on screen is shown straight away, without animation
+                if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+                else observer.observe(el);
+            });
             document.documentElement.classList.add('js-ready');
         }
 
